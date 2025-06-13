@@ -32,6 +32,12 @@ def login_user(data):
     print(f"Статус код: {response.status_code}")
     return response.json()
 
+def login_user_negative(data):
+    response = requests.post(f"{BASE_URL}/login/",json=data, headers=BASE_HEADERS)
+    assert response.status_code == 400
+    print(f"Статус код: {response.status_code}")
+    return response.json()
+
 def create_new_user(data):
     response = requests.post(f"{BASE_URL}/users/", json=data, headers=BASE_HEADERS)
     response.raise_for_status()
