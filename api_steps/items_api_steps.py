@@ -3,6 +3,9 @@ import requests
 BASE_URL = "https://reqres.in/api"
 BASE_HEADERS = {"x-api-key": "reqres-free-v1"}
 
+NEGATIVE_URL_FOR_LIST_USERS = f"{BASE_URL}/users?page=1"
+NEGATIVE_URL_FOR_LIST_USERS2 = f"{BASE_URL}/users?page=3"
+
 def create_user(data):
     response = requests.post(f"{BASE_URL}/register/", json=data, headers=BASE_HEADERS)
     response.raise_for_status()
@@ -55,6 +58,12 @@ def create_new_user_negative(data):
 def list_users():
     response = requests.get(f"{BASE_URL}/users?page=2", headers=BASE_HEADERS)
     response.raise_for_status()
+    assert response.status_code == 200
+    print(f"Статус код: {response.status_code}")
+    return response.json()['data']
+
+def list_users_negative():
+    response = requests.get(f"{NEGATIVE_URL_FOR_LIST_USERS2}", headers=BASE_HEADERS)
     assert response.status_code == 200
     print(f"Статус код: {response.status_code}")
     return response.json()['data']
