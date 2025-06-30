@@ -1,0 +1,6 @@
+from test_items.config import REGISTER_DATA_EMAIL, REGISTER_DATA_PASSWORD
+
+REGISTER_DATA = {
+    "email": REGISTER_DATA_EMAIL,
+    "password": REGISTER_DATA_PASSWORD
+}
