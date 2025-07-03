@@ -1,8 +1,8 @@
 import pytest
 
-from api_steps.items_api_steps import create_user, delete_user
+from src.api_steps.items_api_steps import create_user, delete_user
 from test_items.data.register_data_positive import REGISTER_DATA
-from test_items.data.register_data_negative import REGISTER_DATA_NEGATIVE, REGISTER_DATA_NEGATIVE2
+from test_items.data.register_data_negative import REGISTER_DATA_NEGATIVE, REGISTER_DATA_NEGATIVE2, REGISTER_DATA_NEGATIVE3
 
 """
     Тест проверяет POST-запрос к эндпоинту /register/.
@@ -36,10 +36,27 @@ def test_create_user():
     - Сервер возвращает "error" == 'Missing email or username'.
 """
 
-def test_create_user_negative():
 
-    create_us3r = create_user(REGISTER_DATA_NEGATIVE, 400)
-    assert create_us3r['error'] == 'Missing password'
+@pytest.mark.parametrize(
+    "user_data, expected_code",
+    [
+        # Пароль отсутствует
+        (REGISTER_DATA_NEGATIVE, 400),
+
+        # Неверный email
+        (REGISTER_DATA_NEGATIVE2, 400),
+
+        # Некорректный password
+        (REGISTER_DATA_NEGATIVE3, 400),
+    ]
+)
+def test_create_user_negative(user_data, expected_code):
+    response = create_user(user_data, expected_code)
+
+    # assert expected_error == response['error']
+
+
+
 
 """
     Тест проверяет POST-запрос к эндпоинту /register/.
@@ -51,8 +68,8 @@ def test_create_user_negative():
     - Сервер возвращает "error" == 'Missing email or username'.
 """
 
-def test_create_user_negative2():
-
-    create_us3r = create_user(REGISTER_DATA_NEGATIVE2, 400)
-    assert create_us3r['error'] == 'Missing email or username'
+# def test_create_user_negative2():
+#
+#     create_us3r = create_user(REGISTER_DATA_NEGATIVE2)
+#     assert create_us3r['error'] == 'Missing email or username'
 

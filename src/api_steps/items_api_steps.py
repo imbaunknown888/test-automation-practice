@@ -13,6 +13,8 @@ def create_user(data, expected_status_code: int):
     if 200 <= expected_status_code < 400:
         response.raise_for_status()
     print(f"Статус код: {response.status_code}")
+    assert response.status_code == expected_status_code, \
+        f"Expected {expected_status_code}, got {response.status_code}"
     return response.json()
 
 # Удаление аккаунта пользователя
@@ -33,6 +35,7 @@ def login_user(data, expected_status_code: int):
     if 200 <= expected_status_code < 400:
         response.raise_for_status()
     print(f"Статус код: {response.status_code}")
+    assert response.status_code == 200, f"Expected 200, got {response.status_code}"
     return response.json()
 
 # Создание нового пользователя из админки
@@ -42,6 +45,7 @@ def create_new_user(data, expected_status_code: int):
     if 200 <= expected_status_code < 400:
         response.raise_for_status()
     print(f"Статус код: {response.status_code}")
+    assert response.status_code == 201, f"Expected 201, got {response.status_code}"
     return response.json()
 
 # Список пользователей
@@ -51,4 +55,5 @@ def list_users(expected_status_code: int):
     if 200 <= expected_status_code < 400:
         response.raise_for_status()
     print(f"Статус код: {response.status_code}")
+    assert response.status_code == 200, f"Expected 200, got {response.status_code}"
     return response.json()['data']

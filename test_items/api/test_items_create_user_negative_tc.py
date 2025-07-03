@@ -1,6 +1,6 @@
 import pytest
 
-from api_steps.items_api_steps import create_user, delete_user, create_new_user
+from src.api_steps.items_api_steps import create_user, delete_user, create_new_user
 from test_items.data.create_user_data_positive import CREATE_USER_DATA
 from test_items.data.create_user_data_negative import CREATE_USER_DATA_NEGATIVE, CREATE_USER_DATA_NEGATIVE2, CREATE_USER_DATA_NEGATIVE3, CREATE_USER_DATA_NEGATIVE4, CREATE_USER_DATA_NEGATIVE5
 

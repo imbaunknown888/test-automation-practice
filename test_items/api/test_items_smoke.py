@@ -1,6 +1,7 @@
 import pytest
+import requests
 
-from api_steps.items_api_steps import create_user, delete_user, login_user, create_new_user, list_users
+from src.api_steps.items_api_steps import create_user, delete_user, login_user, create_new_user, list_users
 from test_items.data.register_data_positive import REGISTER_DATA
 from test_items.data.login_data_positive import LOGIN_DATA
 from test_items.data.create_user_data_positive import CREATE_USER_DATA
