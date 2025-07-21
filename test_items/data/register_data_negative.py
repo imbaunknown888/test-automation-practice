@@ -1,13 +1,13 @@
-REGISTER_DATA_NEGATIVE = {
+REGISTER_DATA_WITHOUT_PASSWORD = {
 "email": "sydney@fife"
 }
 
-REGISTER_DATA_NEGATIVE2 = {
+REGISTER_DATA_WITH_EMPTY_EMAIL_PASSWORD = {
     "email": "",
     "password": ""
 }
 
-REGISTER_DATA_NEGATIVE3 = {
+REGISTER_DATA_WITH_NEGATIVE_PASSWORD = {
     "email": "sydney@fife",
-    "password": "pistol2"
+    "password": "pis tol2"
 }

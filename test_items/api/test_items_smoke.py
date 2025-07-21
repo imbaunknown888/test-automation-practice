@@ -1,7 +1,12 @@
 import pytest
 import requests
 
-from src.api_steps.items_api_steps import create_user, delete_user, login_user, create_new_user, list_users
+from src.api_steps.items_api_registration import create_user
+from src.api_steps.items_api_create_new_user_from_admin import create_new_user
+from src.api_steps.items_api_delete_user import delete_user
+from src.api_steps.items_api_autorisation_user import login_user
+from src.api_steps.items_api_list_users_negative import list_users
+
 from test_items.data.register_data_positive import REGISTER_DATA
 from test_items.data.login_data_positive import LOGIN_DATA
 from test_items.data.create_user_data_positive import CREATE_USER_DATA
@@ -65,7 +70,9 @@ def test_create_new_user():
 
 def test_list_us3rs():
     users = list_users(200)
-    for user in users:
-        assert 'id' in user
-        assert 'email' in user
-        assert 'last_name' in user
+    first_user = users['data'][0]
+    assert first_user['id'] == 7
+    assert first_user['email'] == 'michael.lawson@reqres.in'
+    assert first_user['first_name'] == 'Michael'
+    assert first_user['last_name'] == 'Lawson'
+

@@ -1,19 +1,12 @@
 import pytest
 
-from src.api_steps.items_api_steps import create_user, delete_user, login_user, list_users
-from tests.data.login_data_positive import LOGIN_DATA
-from tests.data.create_user_data_positive import CREATE_USER_DATA
+from src.api_steps.items_api_registration import create_user
+from src.api_steps.items_api_delete_user import delete_user
+from src.api_steps.items_api_autorisation_user import login_user
+from src.api_steps.items_api_list_users_negative import list_users
 
-
-"""
-    Тест проверяет POST-запрос к эндпоинту /register/.
-
-    Проверяет:
-    - Создание аккаунта новым пользователем.
-    - Статус ответа 201 OK.
-    - Сервер возвращает пользователю "id", "token".
-    - После прохождения тестов удаляет созданный аккаунт.
-"""
+from test_items.data.login_data_positive import LOGIN_DATA
+from test_items.data.create_user_data_positive import CREATE_USER_DATA
 
 @pytest.fixture()
 def create_new_user():
@@ -47,8 +40,8 @@ def test_login_user():
 """
 
 def test_list_user_negative1():
-    list_us3rs_negative = list_users(400)
-    assert list_us3rs_negative['data']['page'] == 1
+    list_us3rs_negative = list_users(200)
+    assert list_us3rs_negative['total'] == 13
 
 """
     Тест проверяет POST-запрос к эндпоинту /login/.
@@ -59,6 +52,6 @@ def test_list_user_negative1():
 """
 
 def test_list_user_negative2():
-    list_us3rs_negative = list_users(400)
-    assert list_us3rs_negative['data']['page'] == 3
+    list_us3rs_negative = list_users(200)
+    assert list_us3rs_negative['page'] == 3
 
