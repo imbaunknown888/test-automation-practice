@@ -1,9 +1,8 @@
 import pytest
 
-from src.api_steps.items_api_registration import create_user
-from src.api_steps.items_api_create_new_user_from_admin import create_new_user
+from src.api_steps.items_api_steps import create_user, delete_user, create_new_user
 from test_items.data.create_user_data_positive import CREATE_USER_DATA
-from test_items.data.create_user_data_negative import CREATE_USER_DATA_EMPTY_VALUE_JOB, CREATE_USER_DATA_EMPTY_VALUE_NAME, CREATE_USER_DATA_NAME_JOB_INT_VALUE, CREATE_USER_DATA_EMPTY_VALUE_NAME_JOB, CREATE_USER_DATA_EMPTY_JSON
+from test_items.data.create_user_data_negative import CREATE_USER_DATA_NEGATIVE, CREATE_USER_DATA_NEGATIVE2, CREATE_USER_DATA_NEGATIVE3, CREATE_USER_DATA_NEGATIVE4, CREATE_USER_DATA_NEGATIVE5
 
 """
     Тест проверяет POST-запрос к эндпоинту /register/.
@@ -15,11 +14,15 @@ from test_items.data.create_user_data_negative import CREATE_USER_DATA_EMPTY_VAL
     - После прохождения тестов удаляет созданный аккаунт.
 """
 
+@pytest.fixture()
 def create_n3w_user():
     user = create_user(CREATE_USER_DATA, 201)
-
-    assert user['name'] == 'morpheus'
-    assert user['job'] == 'leader'
+    user_name = user['name']
+    yield user
+    try:
+        delete_user(user_name)
+    except Exception:
+        pass
 
 
 """
@@ -34,7 +37,7 @@ def create_n3w_user():
 
 def test_create_new_user():
 
-        create_us3r = create_new_user(CREATE_USER_DATA_EMPTY_VALUE_JOB, 400)
+        create_us3r = create_new_user(CREATE_USER_DATA_NEGATIVE, 400)
         assert 'name' in create_us3r
         assert 'job' in create_us3r
         assert 'id' in create_us3r
@@ -52,7 +55,7 @@ def test_create_new_user():
 
 def test_create_new_user2():
 
-        create_us3r = create_new_user(CREATE_USER_DATA_EMPTY_VALUE_NAME,400)
+        create_us3r = create_new_user(CREATE_USER_DATA_NEGATIVE2,400)
         assert 'name' in create_us3r
         assert 'job' in create_us3r
         assert 'id' in create_us3r
@@ -70,7 +73,7 @@ def test_create_new_user2():
 
 def test_create_new_user3():
 
-        create_us3r = create_new_user(CREATE_USER_DATA_NAME_JOB_INT_VALUE, 400)
+        create_us3r = create_new_user(CREATE_USER_DATA_NEGATIVE3, 400)
         assert 'name' in create_us3r
         assert 'job' in create_us3r
         assert 'id' in create_us3r
@@ -88,7 +91,7 @@ def test_create_new_user3():
 
 def test_create_new_user4():
 
-        create_us3r = create_new_user(CREATE_USER_DATA_EMPTY_VALUE_NAME_JOB, 400)
+        create_us3r = create_new_user(CREATE_USER_DATA_NEGATIVE4, 400)
         assert 'name' in create_us3r
         assert 'job' in create_us3r
         assert 'id' in create_us3r
@@ -106,6 +109,6 @@ def test_create_new_user4():
 
 def test_create_new_user5():
 
-        create_us3r = create_new_user(CREATE_USER_DATA_EMPTY_JSON, 400)
+        create_us3r = create_new_user(CREATE_USER_DATA_NEGATIVE5, 400)
         assert 'id' in create_us3r
         assert 'createdAt' in create_us3r

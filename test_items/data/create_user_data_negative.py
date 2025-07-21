@@ -1,19 +1,19 @@
-CREATE_USER_DATA_EMPTY_VALUE_JOB = {
+CREATE_USER_DATA_NEGATIVE = {
     "name": "morpheus",
     "job": ""
 }
-CREATE_USER_DATA_EMPTY_VALUE_NAME = {
+CREATE_USER_DATA_NEGATIVE2 = {
     "name": "",
     "job": "leader"
 }
-CREATE_USER_DATA_NAME_JOB_INT_VALUE = {
+CREATE_USER_DATA_NEGATIVE3 = {
     "name": 5,
     "job": 6
 }
-CREATE_USER_DATA_EMPTY_VALUE_NAME_JOB = {
+CREATE_USER_DATA_NEGATIVE4 = {
     "name": "",
     "job": ""
 }
-CREATE_USER_DATA_EMPTY_JSON = {
+CREATE_USER_DATA_NEGATIVE5 = {
 
 }

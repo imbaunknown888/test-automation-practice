@@ -1,7 +1,7 @@
-LOGIN_DATA_WITHOUT_PASSWORD = {
+LOGIN_DATA_NEGATIVE = {
     "email": "peter@klaven"
 }
 
-LOGIN_DATA_EMPTY_JSON = {
+LOGIN_DATA_NEGATIVE2 = {
 
 }
