@@ -1,12 +1,9 @@
 import pytest
 
-from src.api_steps.items_api_autorisation_user import login_user
-from src.api_steps.items_api_registration import create_user
-from src.api_steps.items_api_delete_user import delete_user
-
-from test_items.data.register_data_positive import REGISTER_DATA
-from test_items.data.login_data_positive import LOGIN_DATA
-from test_items.data.login_data_negative import LOGIN_DATA_WITHOUT_PASSWORD, LOGIN_DATA_EMPTY_JSON
+from src.api_steps.items_api_steps import create_user, delete_user, login_user
+from tests.data.register_data_positive import REGISTER_DATA
+from tests.data.login_data_positive import LOGIN_DATA
+from tests.data.login_data_negative import LOGIN_DATA_NEGATIVE, LOGIN_DATA_NEGATIVE2
 
 
 """
@@ -57,7 +54,7 @@ def test_login_user_positive():
 
 def test_login_user_negative():
 
-    login_us3r = login_user(LOGIN_DATA_WITHOUT_PASSWORD, 400)
+    login_us3r = login_user(LOGIN_DATA_NEGATIVE, 400)
     assert login_us3r['error'] == 'Missing password'
 
 """
@@ -72,5 +69,5 @@ def test_login_user_negative():
 
 def test_login_user_negative2():
 
-    login_us3r = login_user(LOGIN_DATA_EMPTY_JSON, 400)
+    login_us3r = login_user(LOGIN_DATA_NEGATIVE2, 400)
     assert login_us3r['error'] == 'Missing email or username'
